@@ -30,16 +30,16 @@ def send_email_notification(message):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login('naimatoyewale@gmail.com', 'oyedoyin')
+    server.login('naim@gmail.com', 'mmmmmm')
 
     # Set up email message
     msg = MIMEText(message)
     msg['Subject'] = 'Data Quality Check Failed'
-    msg['From'] = 'naimatoyewale@gmail.com'
-    msg['To'] = 'adenijimujeeb@gmail.com'
+    msg['From'] = 'naim@gmail.com'
+    msg['To'] = 'ade@gmail.com'
 
     # Send email message
-    server.sendmail('naimatoyewale@gmail.com', ['adenijimujeeb@gmail.com'], msg.as_string())
+    server.sendmail('naim@gmail.com', ['ade@gmail.com'], msg.as_string())
     print("Sent email: ", message)
 
     # Close SMTP connection
