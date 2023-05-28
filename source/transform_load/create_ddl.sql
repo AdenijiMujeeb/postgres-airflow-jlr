@@ -1,5 +1,4 @@
 -- This is store procedure is used for creating DDL
-
 CREATE OR REPLACE PROCEDURE create_tables() 
 LANGUAGE plpgsql 
 AS $$
