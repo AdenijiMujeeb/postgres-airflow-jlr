@@ -31,13 +31,14 @@ def clean_and_save_csv(input_file_path_1, input_file_path_2 ):
     # Save the updated dataframe to the same CSV file, overwriting the original file
     df_base.to_csv(input_file_path_1, index=False)
     df_options.to_csv(input_file_path_2, index=False)
-
+    print(df_base)
     return df_base, df_options
 
 def load_csv_to_postgres(directory, conn_id):
     pg_hook = PostgresHook(postgres_conn_id=conn_id)
     conn = pg_hook.get_conn()
     cursor = conn.cursor()
+    print(cursor)
     for filename in os.listdir(directory):
         if filename.endswith('.csv'):
             table_name = os.path.splitext(filename)[0]
