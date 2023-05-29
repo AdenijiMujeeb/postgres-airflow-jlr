@@ -1,4 +1,3 @@
-create or replace table AS (
-    select *
-    from ty
+create or replace table seave as(
+    select * from ty;
 );
