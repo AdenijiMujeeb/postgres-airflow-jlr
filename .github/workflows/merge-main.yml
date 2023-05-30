@@ -22,7 +22,7 @@ jobs:
 
       - name: Merge main into staging
         run: |
-          git merge -X recursive -X theirs --no-edit main
+          git merge -X recursive -X theirs --no-edit main || (git merge --abort && git reset --hard origin/staging && exit 1)
           git push origin staging || (git reset --hard origin/staging && exit 1)
 
       - name: Send status message
