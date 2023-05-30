@@ -22,7 +22,7 @@ jobs:
 
       - name: Create staging branch
         run: |
-          git fetch origin staging:staging || git checkout -b staging
+          git fetch origin staging
           git pull origin staging --ff-only
 
       - name: Merge main into staging
