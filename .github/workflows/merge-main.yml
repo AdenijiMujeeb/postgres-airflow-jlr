@@ -1,0 +1,46 @@
+name: Merge main into staging
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Merge main into staging
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git fetch origin main --prune
+          git checkout staging
+          git pull origin staging --ff-only
+          git merge --no-ff --no-edit main
+          git push origin staging || (git reset --hard origin/staging && exit 1)
+
+      - name: Send status message
+        if: ${{ success() }}
+        run: |
+          echo "Changes from main branch have been successfully merged into staging branch."
+
+      - name: Log merge details
+        if: ${{ success() }}
+        run: |
+          echo "Merged changes from main branch to staging branch."
+          git log --oneline -n 5 --no-decorate
+
+      - name: Send failure message
+        if: ${{ failure() }}
+        run: |
+          echo "Failed to merge changes from main branch to staging branch. Please review and resolve any conflicts."
+
+      - name: Rollback changes on failure
+        if: ${{ failure() }}
+        run: |
+          git reset --hard origin/staging
+          git clean -ffdx
